@@ -8,6 +8,8 @@ pip install cmake==3.28.3
 
 if [ "${build_os:0:5}" == macos ] && [ "${build_arch}" == aarch64 ]; then
 	cmake -DCMAKE_OSX_ARCHITECTURES=arm64 -DCOMPUTE_BACKEND=cpu .
+elif [ "${build_os:0:7}" == windows ] && [ "${build_arch}" == "arm64" ]; then
+	cmake -G "Visual Studio 17 2022" -A ARM64 -DCOMPUTE_BACKEND=cpu .
 else
 	cmake -DCOMPUTE_BACKEND=cpu .
 fi
