@@ -1,0 +1,98 @@
+﻿====================================================================================================
+bitsandbytes CPU Benchmark - Windows ARM64
+====================================================================================================
+PyTorch version: 2.12.0+cpu
+bitsandbytes version: 0.50.0.dev0
+NumPy version: 2.4.6
+Device: CPU
+Torch threads: 12
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+8-bit Quantization (blockwise)
+----------------------------------------------------------------------------------------------------
+quantize_blockwise_fp32 [1024x1024]                | mean:     0.79 ms | std:   0.05 ms | min:     0.75 ms | max:     0.94 ms
+quantize_blockwise_fp32 [4096x4096]                | mean:     2.57 ms | std:   0.54 ms | min:     2.22 ms | max:     3.90 ms
+quantize_blockwise_fp32 [1024x8192]                | mean:     1.30 ms | std:   0.33 ms | min:     1.12 ms | max:     1.97 ms
+
+----------------------------------------------------------------------------------------------------
+8-bit Dequantization (blockwise)
+----------------------------------------------------------------------------------------------------
+dequantize_blockwise_fp32 [1024x1024]              | mean:     0.07 ms | std:   0.02 ms | min:     0.06 ms | max:     0.10 ms
+dequantize_blockwise_fp32 [4096x4096]              | mean:     2.89 ms | std:   1.96 ms | min:     1.64 ms | max:     6.93 ms
+dequantize_blockwise_fp32 [1024x8192]              | mean:     0.76 ms | std:   0.09 ms | min:     0.68 ms | max:     0.96 ms
+
+----------------------------------------------------------------------------------------------------
+4-bit NF4 Quantization
+----------------------------------------------------------------------------------------------------
+quantize_nf4_fp32 [1024x1024]                      | mean:    14.10 ms | std:   3.54 ms | min:    11.45 ms | max:    21.92 ms
+quantize_nf4_fp32 [4096x4096]                      | mean:   309.26 ms | std:  16.39 ms | min:   294.06 ms | max:   337.49 ms
+quantize_nf4_fp32 [1024x8192]                      | mean:   157.33 ms | std:  20.09 ms | min:   125.22 ms | max:   187.27 ms
+
+----------------------------------------------------------------------------------------------------
+4-bit NF4 Dequantization
+----------------------------------------------------------------------------------------------------
+dequantize_nf4_fp32 [1024x1024]                    | mean:     1.42 ms | std:   0.06 ms | min:     1.35 ms | max:     1.57 ms
+dequantize_nf4_fp32 [4096x4096]                    | mean:    20.40 ms | std:   3.20 ms | min:    11.37 ms | max:    21.83 ms
+dequantize_nf4_fp32 [1024x8192]                    | mean:     9.77 ms | std:   1.67 ms | min:     7.24 ms | max:    10.97 ms
+
+----------------------------------------------------------------------------------------------------
+4-bit FP4 Quantization
+----------------------------------------------------------------------------------------------------
+quantize_fp4_fp32 [1024x1024]                      | mean:    25.14 ms | std:   1.88 ms | min:    20.90 ms | max:    26.23 ms
+quantize_fp4_fp32 [4096x4096]                      | mean:   321.07 ms | std:  25.68 ms | min:   266.62 ms | max:   364.28 ms
+quantize_fp4_fp32 [1024x8192]                      | mean:   181.12 ms | std:  15.80 ms | min:   154.10 ms | max:   196.08 ms
+
+----------------------------------------------------------------------------------------------------
+4-bit FP4 Dequantization
+----------------------------------------------------------------------------------------------------
+dequantize_fp4_fp32 [1024x1024]                    | mean:     1.46 ms | std:   0.05 ms | min:     1.40 ms | max:     1.56 ms
+dequantize_fp4_fp32 [4096x4096]                    | mean:    21.59 ms | std:   2.28 ms | min:    15.17 ms | max:    22.90 ms
+dequantize_fp4_fp32 [1024x8192]                    | mean:     7.79 ms | std:   0.75 ms | min:     6.88 ms | max:     8.99 ms
+
+----------------------------------------------------------------------------------------------------
+4-bit NF4 Dequantization (bfloat16 output)
+----------------------------------------------------------------------------------------------------
+dequantize_nf4_bf16 [1024x1024]                    | mean:     0.93 ms | std:   0.06 ms | min:     0.90 ms | max:     1.11 ms
+dequantize_nf4_bf16 [4096x4096]                    | mean:    16.16 ms | std:   1.70 ms | min:    15.29 ms | max:    20.96 ms
+dequantize_nf4_bf16 [1024x8192]                    | mean:     7.93 ms | std:   0.60 ms | min:     7.23 ms | max:     8.68 ms
+
+----------------------------------------------------------------------------------------------------
+Linear4bit Forward Pass (NF4)
+----------------------------------------------------------------------------------------------------
+Linear4bit_nf4_fwd [bs=1, 1024->1024]              | mean:     1.09 ms | std:   0.01 ms | min:     1.08 ms | max:     1.10 ms
+Linear4bit_nf4_fwd [bs=1, 4096->4096]              | mean:    19.39 ms | std:   1.10 ms | min:    18.73 ms | max:    21.35 ms
+Linear4bit_nf4_fwd [bs=1, 4096->11008]             | mean:    90.74 ms | std:   0.26 ms | min:    90.52 ms | max:    91.15 ms
+Linear4bit_nf4_fwd [bs=8, 4096->4096]              | mean:    40.22 ms | std:   8.68 ms | min:    33.38 ms | max:    49.79 ms
+Linear4bit_nf4_fwd [bs=8, 4096->11008]             | mean:   181.86 ms | std:  66.55 ms | min:   121.27 ms | max:   271.72 ms
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+quantize_blockwise_fp32 [1024x1024]                | mean:     0.79 ms | std:   0.05 ms | min:     0.75 ms | max:     0.94 ms
+quantize_blockwise_fp32 [4096x4096]                | mean:     2.57 ms | std:   0.54 ms | min:     2.22 ms | max:     3.90 ms
+quantize_blockwise_fp32 [1024x8192]                | mean:     1.30 ms | std:   0.33 ms | min:     1.12 ms | max:     1.97 ms
+dequantize_blockwise_fp32 [1024x1024]              | mean:     0.07 ms | std:   0.02 ms | min:     0.06 ms | max:     0.10 ms
+dequantize_blockwise_fp32 [4096x4096]              | mean:     2.89 ms | std:   1.96 ms | min:     1.64 ms | max:     6.93 ms
+dequantize_blockwise_fp32 [1024x8192]              | mean:     0.76 ms | std:   0.09 ms | min:     0.68 ms | max:     0.96 ms
+quantize_nf4_fp32 [1024x1024]                      | mean:    14.10 ms | std:   3.54 ms | min:    11.45 ms | max:    21.92 ms
+quantize_nf4_fp32 [4096x4096]                      | mean:   309.26 ms | std:  16.39 ms | min:   294.06 ms | max:   337.49 ms
+quantize_nf4_fp32 [1024x8192]                      | mean:   157.33 ms | std:  20.09 ms | min:   125.22 ms | max:   187.27 ms
+dequantize_nf4_fp32 [1024x1024]                    | mean:     1.42 ms | std:   0.06 ms | min:     1.35 ms | max:     1.57 ms
+dequantize_nf4_fp32 [4096x4096]                    | mean:    20.40 ms | std:   3.20 ms | min:    11.37 ms | max:    21.83 ms
+dequantize_nf4_fp32 [1024x8192]                    | mean:     9.77 ms | std:   1.67 ms | min:     7.24 ms | max:    10.97 ms
+quantize_fp4_fp32 [1024x1024]                      | mean:    25.14 ms | std:   1.88 ms | min:    20.90 ms | max:    26.23 ms
+quantize_fp4_fp32 [4096x4096]                      | mean:   321.07 ms | std:  25.68 ms | min:   266.62 ms | max:   364.28 ms
+quantize_fp4_fp32 [1024x8192]                      | mean:   181.12 ms | std:  15.80 ms | min:   154.10 ms | max:   196.08 ms
+dequantize_fp4_fp32 [1024x1024]                    | mean:     1.46 ms | std:   0.05 ms | min:     1.40 ms | max:     1.56 ms
+dequantize_fp4_fp32 [4096x4096]                    | mean:    21.59 ms | std:   2.28 ms | min:    15.17 ms | max:    22.90 ms
+dequantize_fp4_fp32 [1024x8192]                    | mean:     7.79 ms | std:   0.75 ms | min:     6.88 ms | max:     8.99 ms
+dequantize_nf4_bf16 [1024x1024]                    | mean:     0.93 ms | std:   0.06 ms | min:     0.90 ms | max:     1.11 ms
+dequantize_nf4_bf16 [4096x4096]                    | mean:    16.16 ms | std:   1.70 ms | min:    15.29 ms | max:    20.96 ms
+dequantize_nf4_bf16 [1024x8192]                    | mean:     7.93 ms | std:   0.60 ms | min:     7.23 ms | max:     8.68 ms
+Linear4bit_nf4_fwd [bs=1, 1024->1024]              | mean:     1.09 ms | std:   0.01 ms | min:     1.08 ms | max:     1.10 ms
+Linear4bit_nf4_fwd [bs=1, 4096->4096]              | mean:    19.39 ms | std:   1.10 ms | min:    18.73 ms | max:    21.35 ms
+Linear4bit_nf4_fwd [bs=1, 4096->11008]             | mean:    90.74 ms | std:   0.26 ms | min:    90.52 ms | max:    91.15 ms
+Linear4bit_nf4_fwd [bs=8, 4096->4096]              | mean:    40.22 ms | std:   8.68 ms | min:    33.38 ms | max:    49.79 ms
+Linear4bit_nf4_fwd [bs=8, 4096->11008]             | mean:   181.86 ms | std:  66.55 ms | min:   121.27 ms | max:   271.72 ms
+====================================================================================================

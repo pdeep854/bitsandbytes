@@ -243,6 +243,7 @@ if not isinstance(lib, ErrorHandlerMockBNBNativeLibrary):
 
         return out
 
+    # x86 gemv_4bit kernel registration
     if has_avx512bf16():
         gemm_4bit_forward_kernel = None
         try:

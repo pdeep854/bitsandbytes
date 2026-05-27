@@ -823,6 +823,7 @@ void cdequantize_blockwise_cpu_nf4_fp16(
     dequantizeBlockwise4bitCpu<fp16_t, NF4>(A, absmax, out, blocksize, m, n);
 }
 
+
 #if defined(__AVX512F__) && defined(__AVX512BF16__)
 void gemv_4bit_inference_cpu_fp4_bf16(
     int64_t M, int64_t N, int64_t K, const bf16_t* __restrict__ x, const unsigned char* __restrict__ w,

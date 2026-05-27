@@ -316,6 +316,7 @@ void dequantizeBlockwise4bitCpu(
     unsigned char* A, const float* absmax, T* out, long long blocksize, long long m, long long n
 );
 
+
 #if defined(__AVX512F__)
 #include <immintrin.h>
 
