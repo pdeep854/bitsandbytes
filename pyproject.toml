@@ -101,6 +101,7 @@ markers = [
     "deprecated: mark test as covering a deprecated feature",
     "slow: mark test as slow",
 ]
+testpaths = ["tests"]
 
 [tool.ruff]
 src = [
@@ -147,6 +148,9 @@ ignore = [
     "UP030",
 ]
 "bitsandbytes/**/triton/**/*.py" = [
+    "I001",  # import order
+]
+"bitsandbytes/backends/utils.py" = [
     "I001",  # import order
 ]
 
