@@ -1,6 +1,8 @@
 name: PR Tests
 
 on:
+  push: {} # Run on every push
+  workflow_dispatch: {} # Allow manual trigger
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [main]
@@ -24,7 +26,6 @@ concurrency:
 jobs:
   test-cpu:
     name: CPU
-    if: github.repository == 'bitsandbytes-foundation/bitsandbytes'
     strategy:
       fail-fast: false
       matrix:
@@ -65,7 +66,6 @@ jobs:
 
   test-cuda:
     name: CUDA ${{ matrix.cuda_version }} (${{ matrix.platform }}, ${{ matrix.gpu_type }}, ${{ matrix.torch_version }})
-    if: github.repository == 'bitsandbytes-foundation/bitsandbytes'
     strategy:
       fail-fast: false
       matrix:
